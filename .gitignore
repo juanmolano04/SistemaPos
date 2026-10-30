@@ -1,0 +1,19 @@
+# Entornos virtuales (Virtual Environments)
+.venv/
+venv/
+ENV/
+env/
+
+# Archivos temporales de Python (Caché de compilación)
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Archivos ocultos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de configuración de editores (Opcional, ej: VS Code)
+.vscode/
+.idea/
