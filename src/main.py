@@ -1,7 +1,7 @@
 import customtkinter as ctk
 from UI import menu as m
 
-#Cargar datos e iniciando Sistema Pos
+#Cargar datos e iniciar app
 def main(app):
     print("Iniciando app")#referencia de inicio
     m.principal_interfaz(app)
