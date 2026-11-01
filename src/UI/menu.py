@@ -24,6 +24,18 @@ def principal_interfaz(Spos):
 # diseño de interfaz de inicio
 def inicio(app):
     #contenedor de inicio
-    contenedor_principal = ctk.CTkFrame(app,fg_color="gray")
-    contenedor_principal.grid(row = 0, column = 0)
+    contenedor_principal = ctk.CTkFrame(app,fg_color=BG_PRINCIPAL)
+    contenedor_principal.pack(fill="both",expand=True)
+    #tamaños de grid del contenedor principal
+    contenedor_principal.grid_columnconfigure(0, weight=3)
+    contenedor_principal.grid_columnconfigure(1, weight=1)
+    contenedor_principal.grid_rowconfigure(0, weight=1) 
+    
+    #contenedor de buscador y productos
+    contenedor_categorias = ctk.CTkFrame(contenedor_principal,fg_color=BG_PRINCIPAL)
+    contenedor_categorias.grid(row=0,column=0,sticky="nsew", pady=20,padx=10)
+    
+    #contenedor factura
+    contenedor_factura = ctk.CTkFrame(contenedor_principal,fg_color=BG_PANEL,border_color=TEXTO_SECUNDARIO,border_width=2,corner_radius=20)
+    contenedor_factura.grid(row=0,column=1,sticky="nsew", pady=20,padx=10)
     
