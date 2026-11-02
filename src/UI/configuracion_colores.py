@@ -12,3 +12,4 @@ TEXTO_SECUNDARIO = "#808191"  # Gris opaco para subtítulos, etiquetas y líneas
 #variables generales
 
 COLUMNAS_MAXIMAS = 5
+timer_id = None

@@ -1,6 +1,6 @@
 import customtkinter as ctk
 from UI import plantillas as p, configuracion_colores as cls
-from database import almacenamiento as alm
+from logic import inventario as inv
 
 #Menu de inicio 
 def principal_interfaz(Spos):
@@ -28,31 +28,39 @@ def inicio(app):
     contenedor_factura = ctk.CTkFrame(contenedor_principal,fg_color=cls.BG_PANEL,border_color=cls.TEXTO_SECUNDARIO,border_width=2,corner_radius=20)
     contenedor_factura.grid(row=0,column=1,sticky="nsew", pady=20,padx=10)
     
+    
     #se llama a buscar y filtrar para tener el controlador 
-    p.buscar_filtrar(contenedor_categorias)
+    buscador = p.buscar_filtrar(contenedor_categorias)
+    
+    
+    #eventos del buscador
+    def al_escribir(event):
+        """Espera a que el usuario deje de escribir por 200ms antes de recargar la interfaz."""
+        if cls.timer_id is not None:
+            app.after_cancel(cls.timer_id)
+        
+        cls.timer_id = app.after(200, ejecutar_filtro_matriz)
+    
+    def ejecutar_filtro_matriz():
+        """Captura el texto actual de la barra y actualiza el contenedor grid."""
+        texto = buscador.get()
+        # Pasamos el contenedor global donde se pintan tus productos
+        inv.renderizar_contenedor_producto(contenedor_productos, texto)
+    
+    buscador.bind("<KeyRelease>", al_escribir)
+    
+    
     
     #contenedor productos 
     contenedor_productos = ctk.CTkScrollableFrame(contenedor_categorias,fg_color=cls.BG_PRINCIPAL,scrollbar_button_color=cls.BG_INPUTS, scrollbar_button_hover_color=cls.BG_PANEL,orientation="vertical")       # Color de la barra que se mueve
     contenedor_productos.pack(side="top",fill="both",expand =True, padx=10 ,pady= 10)
     
-    conexion = alm.inicializar_bd()
-    cursor = conexion.cursor()
-    cursor.execute("SELECT id, nombre, precio, stock FROM productos")
-    registros = cursor.fetchall()
-    
-
-    for indice, reg in enumerate(registros):
-        id_prod, nombre, precio, stock = reg
-        
-        # Calcular la fila y la columna de la matriz usando divisiones
-        fila_matriz = indice // cls.COLUMNAS_MAXIMAS
-        columna_matriz = indice % cls.COLUMNAS_MAXIMAS
-        
-        contenedor_productos.grid_columnconfigure(columna_matriz,weight=1)
-            
-        p.plantilla_productos(contenedor_productos, fila_matriz,columna_matriz, nombre, precio, stock)
+    inv.renderizar_contenedor_producto(contenedor_productos)
     
     
-    conexion.close()
+    
+    
+    
+    
     
     

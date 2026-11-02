@@ -22,3 +22,17 @@ def inicializar_bd():
     cursor.executemany("INSERT INTO productos (nombre, precio, stock) VALUES (?, ?, ?)", datos)
     conexion.commit()
     return conexion
+
+def realizar_busqueda(texto,conexion):
+    """Consulta la BD en memoria usando la conexión global."""
+    cursor = conexion.cursor()
+    termino = f"%{texto}%"
+    
+    # Buscamos coincidencias en el nombre
+    cursor.execute("""
+        SELECT nombre, precio, stock FROM productos 
+        WHERE nombre LIKE ? 
+        LIMIT 50
+    """, (termino,))
+    
+    return cursor.fetchall()
