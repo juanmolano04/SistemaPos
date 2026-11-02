@@ -8,3 +8,7 @@ COLOR_ELIMINAR = "#FF6B6B"    # Rojo salmón para los iconos de basura o botón 
 
 TEXTO_TITULO = "#FFFFFF"      # Blanco puro para textos principales, precios y botones
 TEXTO_SECUNDARIO = "#808191"  # Gris opaco para subtítulos, etiquetas y líneas divisorias
+
+#variables generales
+
+COLUMNAS_MAXIMAS = 5

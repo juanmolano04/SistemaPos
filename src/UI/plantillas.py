@@ -19,7 +19,25 @@ def buscar_filtrar(contenedor_padre):
         selector_categorias.grid(row=0,column=1,sticky="nsew",pady=5,padx=5)
     
         #Boton para filtros    
-        boton_filtros = ctk.CTkButton(contenedor_filtros,height=5,width=5,fg_color=cls.BG_INPUTS,text_color=cls.TEXTO_SECUNDARIO,corner_radius=20)
-        boton_filtros.grid(row=0,column=2,sticky="nsew",pady=5,padx=5)
+        boton_filtros = ctk.CTkButton(contenedor_filtros,width=10,fg_color=cls.BG_INPUTS,text_color=cls.TEXTO_SECUNDARIO,corner_radius=20,text="F")
+        boton_filtros.grid(row=0,column=2,pady=5,padx=5)
 
 
+def plantilla_productos(contenedor,fila,columna,nombre,precio,stock):
+        contenedor_producto = ctk.CTkFrame(contenedor,fg_color=cls.BG_PANEL)
+        contenedor_producto.grid(row=fila,column=columna,pady=5,padx=5)
+        
+        
+        contenedor_imgproducto = ctk.CTkFrame(contenedor_producto,fg_color="blue")
+        contenedor_imgproducto.pack()
+        
+        texto_nombrep = ctk.CTkLabel(contenedor_producto,text=nombre)
+        texto_nombrep.pack()
+        
+        texto_stock = ctk.CTkLabel(contenedor_producto,text=stock)
+        texto_stock.pack()
+        
+        texto_precio = ctk.CTkLabel(contenedor_producto,text=precio)
+        texto_precio.pack()
+        
+        
